@@ -102,8 +102,9 @@ export function TotalTokenValueChart() {
         const response = await fetch("/api/metrics?limit=1000")
         const data: Metric[] = await response.json()
 
-        const startDate = new Date("2025-11-11")
         const today = new Date()
+        const startDate = new Date(today)
+        startDate.setDate(startDate.getDate() - 9) // Last 10 days
         const dateMap: { [key: string]: { green: number; transport: number; social: number; energy: number } } = {}
 
         for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
